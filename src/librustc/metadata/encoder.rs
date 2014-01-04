@@ -1906,10 +1906,6 @@ pub fn encode_metadata(parms: EncodeParams, crate: &Crate) -> ~[u8] {
         println!("     total bytes: {}", ecx.stats.total_bytes.get());
     }
 
-    // Pad this, since something (LLVM, presumably) is cutting off the
-    // remaining % 4 bytes.
-    ebml_w.writer.write(&[0u8, 0u8, 0u8, 0u8]);
-
     // This is a horrible thing to do to the outer MemWriter, but thankfully we
     // don't use it again so... it's ok right?
     return util::replace(ebml_w.writer.inner_mut_ref(), ~[]);
